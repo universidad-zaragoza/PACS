@@ -16,6 +16,7 @@ else()
     add_compile_options(-Wall -Wextra -pedantic -Werror)
 endif()
 
+#FIXME add macro for the two steps
 add_executable(hello_pacs hello_pacs.cc)
 target_link_libraries(hello_pacs Threads::Threads)
 add_executable(thread_joinable thread_joinable.cc)
@@ -29,3 +30,6 @@ add_executable(saxpy saxpy.cc)
 target_link_libraries(saxpy Threads::Threads)
 add_executable(saxpy_scaling saxpy_scaling.cc)
 target_link_libraries(saxpy_scaling Threads::Threads)
+
+add_executable(synchronization synchronization.cc)
+target_link_libraries(synchronization Threads::Threads)
