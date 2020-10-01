@@ -18,3 +18,7 @@ cmake ../ # generate the Makefile with cmake
 make # compile the examples
 ls # list the examples
 ```
+
+If you want to build and run the test on Windows, please consider using [CMake
+with Visual
+Studio](https://docs.microsoft.com/es-es/cpp/build/cmake-projects-in-visual-studio?view=vs-2019)
