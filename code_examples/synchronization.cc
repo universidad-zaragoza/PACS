@@ -1,7 +1,6 @@
 #include <iostream>
+#include <random>
 #include <thread>
-
-using namespace std;
 
 namespace { // please check why the anonymous namespace
   int shared_variable = 0;
@@ -16,8 +15,12 @@ void increase_var(const size_t n)
 
 int main() {
 
-    const size_t n = 1024*1024;
-    thread t(increase_var, n);
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(512*1024*1024, 1024*1024*1024);
+    size_t n = dis(gen);
+    
+	std::thread t(increase_var, n);
 
     for(size_t i = 0; i < n; ++i) {
         shared_variable--;

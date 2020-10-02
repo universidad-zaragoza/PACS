@@ -16,7 +16,7 @@ void saxpy(T& z, const typename T::value_type A, const T& x, const T& y,
 int main() {
 
 
-    const size_t N = 256*1024*1024;
+    const size_t N = 1024*1024*1024;
     const float A = 3.14;
     using vf = std::vector<float>;
     vf z(N, 0.0f);
@@ -35,7 +35,7 @@ int main() {
     std::vector<std::thread> thread_vector;
     std::vector<std::chrono::milliseconds> extime_thread;
 
-    size_t max_threads = std::thread::hardware_concurrency();
+    size_t max_threads = std::min(48u, std::thread::hardware_concurrency());
     for(size_t current_threads = 1; current_threads <= max_threads; ++current_threads) {
         // ToDo : run several times and check median and deviation
         // launch the work
