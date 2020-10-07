@@ -15,16 +15,15 @@ void saxpy(T& z, const typename T::value_type A, const T& x, const T& y,
 
 int main() {
 
-
     const size_t N = 1024*1024*1024;
-    const float A = 3.14;
+    const float A = 3.14f;
     using vf = std::vector<float>;
     vf z(N, 0.0f);
     vf x, y;
 
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_real_distribution<> dis(0.0f, 1.0f);
+    std::uniform_real_distribution<float> dis(0.0f, 1.0f);
 
     for(size_t i = 0; i < N; ++i) {
         float value = dis(gen);
