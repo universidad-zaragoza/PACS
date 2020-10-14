@@ -87,7 +87,7 @@ int main(int argc, char** argv)
 
 
   // 3. Create a context, with a device
-  cl_context_properties properties[] = { CL_CONTEXT_PLATFORM, (cl_context_properties)platforms_ids[0], 0};
+  cl_context_properties properties[] = { CL_CONTEXT_PLATFORM, (cl_context_properties)platforms_ids[/***???***/], 0};
   context = clCreateContext(properties, /***???***/, NULL, NULL, &err);
   cl_error(err, "Failed to create a compute context\n");
 
