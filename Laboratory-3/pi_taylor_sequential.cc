@@ -1,5 +1,6 @@
 #include <iomanip>
 #include <iostream>
+#include <limits>
 
 // Allow to change the floating point type
 using my_float = long double;
