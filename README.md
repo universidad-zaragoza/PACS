@@ -29,7 +29,7 @@ than, use the standard `make` tool for obtaining the binaries. By default, cmake
 The directory `code_examples` contains many of the small C++ programs and
 fragments from the slides.
 
-To compile them, you can use `cmake`. For example:
+To compile them on linux or mac OS, you can use `cmake`. For example:
 
 ```bash
 mkdir build-release
@@ -53,6 +53,14 @@ make -j4 # compile the examples in parallel with 4 jobs
 ## Laboratories
 
 Each laboratory includes its own directory, but all of them can be built at the
-same time if required. To build a single laboratory; e.g., the third laboratory, you can invoke c
+same time if required. To build a single laboratory; e.g., the third laboratory,
+please follow these steps:
 
-
+```bash
+mkdir -p build-release
+cd build-release
+rm -rf ./ # only run this command inside build-release directory
+cmake ../
+cd Laboratory-3
+make -j2
+```
