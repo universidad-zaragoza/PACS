@@ -1,0 +1,3 @@
+ADD_PACS_EXECUTABLE(TARGET pi_taylor_sequential SOURCES pi_taylor_sequential.cc)
+ADD_PACS_EXECUTABLE(TARGET pi_taylor_parallel SOURCES pi_taylor_parallel.cc)
+ADD_PACS_EXECUTABLE(TARGET pi_taylor_parallel_kahan SOURCES pi_taylor_parallel_kahan.cc)
