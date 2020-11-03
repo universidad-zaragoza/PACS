@@ -34,7 +34,7 @@ To compile them on linux or mac OS, you can use `cmake`. For example:
 ```bash
 mkdir build-release
 cd build-release
-cmake ../ # generate the Makefile with cmake
+cmake -DCMAKE_BUILD_TYPE=Release ../ # generate the Makefile with cmake
 make # compile the examples
 ls # list the examples
 ```
@@ -48,6 +48,13 @@ mkdir build-debug
 cd build-debug
 cmake -DCMAKE_BUILD_TYPE=Debug ../ # generate the Makefile with cmake
 make -j4 # compile the examples in parallel with 4 jobs
+```
+
+Also if you want to see the actual build commands, there are several alternatives:
+
+```bash
+make VERBOSE=1
+cmake --build . -- VERBOSE=1
 ```
 
 ## Laboratories

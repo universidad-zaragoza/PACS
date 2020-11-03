@@ -1,6 +1,7 @@
 cmake_minimum_required (VERSION 3.1)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 include(AddPacsExecutable)
+include(BuildType)
 
 project (PACS_EXAMPLES)
 
