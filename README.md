@@ -22,7 +22,10 @@ creentials download this repo and compile it.
 One advantage of cmake is the separation between source and binary files. To
 generate the programs, you always have to create a build directory first, then
 invoke cmake to generate the build files, `Makefiles` for Linux, and, after
-than, use the standard `make` tool for obtaining the binaries. By default, cmake builds programs in release mode with optimizations enabled, if you want to build them with debug support; e.g., to use them with `gdb`, you can set the variable `CMAKE_BUILD_TYPE` to `Debug`.
+than, use the standard `make` tool for obtaining the binaries. By default,
+cmake builds programs in release mode with optimizations enabled, if you want
+to build them with debug support; e.g., to use them with `gdb`, you can set the
+variable `CMAKE_BUILD_TYPE` to `Debug`.
 
 ## Code snippets from Class
 
@@ -69,5 +72,10 @@ cd build-release
 rm -rf ./ # only run this command inside build-release directory
 cmake ../
 cd Laboratory-3
-make -j2
+make -j2 # compile two jobs in parallel
 ```
+
+_One workflow approach for the labs is to develop and test in debug mode,
+inside a `build-debug` directory, and switch to release, in another
+`build-release` directory, to run the final experiments and obtain execution
+times or other metrics._
