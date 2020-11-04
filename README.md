@@ -70,7 +70,7 @@ please follow these steps:
 mkdir -p build-release
 cd build-release
 rm -rf ./ # only run this command inside build-release directory
-cmake ../
+cmake -DCMAKE_BUILD_TYPE=Release ../
 cd Laboratory-3
 make -j2 # compile two jobs in parallel
 ```
