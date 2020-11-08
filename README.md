@@ -8,7 +8,7 @@ course of the MS in Robotics, Graphics, and Computer Vision
 The code examples and some laboratories rely on
 [cmake](https://cmake.org/overview/) to enable multi-platform building support,
 so there is no need to manually write any Makefile or other build system. Linux
-is the prefered operating system to work on the labs, but the binaries have
+is the preferred operating system to work on the labs, but the binaries have
 been also compiled on mac OS.
 
 Although, we do not provide support for Windows. If you want to build and run
@@ -17,7 +17,7 @@ Studio](https://docs.microsoft.com/es-es/cpp/build/cmake-projects-in-visual-stud
 
 You can download the free community edition of [Visual Studio
 2019](https://visualstudio.microsoft.com/downloads/), and then with you github
-creentials download this repo and compile it.
+credentials download this repo and compile it.
 
 One advantage of cmake is the separation between source and binary files. To
 generate the programs, you always have to create a build directory first, then
@@ -32,7 +32,7 @@ variable `CMAKE_BUILD_TYPE` to `Debug`.
 The directory `code_examples` contains many of the small C++ programs and
 fragments from the slides.
 
-To compile them on linux or mac OS, you can use `cmake`. For example:
+To compile them on Linux or mac OS, you can use `cmake`. For example:
 
 ```bash
 mkdir build-release
@@ -53,12 +53,21 @@ cmake -DCMAKE_BUILD_TYPE=Debug ../ # generate the Makefile with cmake
 make -j4 # compile the examples in parallel with 4 jobs
 ```
 
-Also if you want to see the actual build commands, there are several alternatives:
+Also if you want to see the actual build commands, there are several
+alternatives such as:
 
 ```bash
-make VERBOSE=1
-cmake --build . -- VERBOSE=1
+make VERBOSE=1  # linux/mac OS specific
+cmake --build . -- VERBOSE=1 # works on any OS
 ```
+
+### Possible Issues
+
+In some machines of the Computer Science Department, two different versions of
+`cmake`, versions 2 and 3, coexists. Their binary names are `cmake` and
+`cmake3`, respectively. Since this repository requires `cmake` version 3, if
+you get an error running `cmake` about the version, please switch to `cmake3`
+executable.
 
 ## Laboratories
 
