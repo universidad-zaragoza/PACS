@@ -67,7 +67,12 @@ In some machines of the Computer Science Department, two different versions of
 `cmake`, versions 2 and 3, coexists. Their binary names are `cmake` and
 `cmake3`, respectively. Since this repository requires `cmake` version 3, if
 you get an error running `cmake` about the version, please switch to `cmake3`
-executable.
+executable. You can check cmake's version with:
+
+```bash
+eniac:PACS user$ cmake -version
+cmake version 3.18.3
+```
 
 ## Laboratories
 
