@@ -13,7 +13,6 @@ class thread_pool
 
   using task_type = void();
 
-  // change to cond var and don't yield
   void worker_thread()
   {
 
