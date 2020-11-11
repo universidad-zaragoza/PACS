@@ -1,16 +1,19 @@
+#include <future>
 #include <iostream>
 #include <random>
-#include <thread>
 #include <vector>
 
 // assume a container
 template <typename T>
-void saxpy(T& z, const typename T::value_type A, const T& x, const T& y,
+T saxpy(const typename T::value_type A, const T& x, const T& y,
         size_t begin, size_t end)
 {
+    T z(x.size());
+
     for(size_t i = begin; i < end; ++i) {
          z[i] = A * x[i] + y[i];
     }
+    return z;
 }
 
 int main() {
@@ -30,10 +33,8 @@ int main() {
         y.push_back(dis(gen));
     }
 
-    std::thread first_half(saxpy<vf>, std::ref(z), A, std::ref(x), std::ref(y), 0, N/2);
-    std::thread second_half(saxpy<vf>, std::ref(z), A, std::ref(x), std::ref(y), N/2, N);
-    first_half.join();
-    second_half.join();
+    auto first_half =  std::async(std::launch::async, saxpy<vf>, A, std::ref(x), std::ref(y), 0, N/2);
+    auto second_half = std::async(std::launch::deferred, saxpy<vf>, A, std::ref(x), std::ref(y), N/2, N);
 
     std::cout << "x:";
     for(const auto i: x) {
@@ -48,9 +49,13 @@ int main() {
     std::cout << std::endl;
 
     std::cout << "z:";
-    for(const auto i: z) {
+    for(const auto i: first_half.get()) {
+        std::cout << " " << i;
+    }
+    for(const auto i: second_half.get()) {
         std::cout << " " << i;
     }
     std::cout << std::endl;
+
 }
 
