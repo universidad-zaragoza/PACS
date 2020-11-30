@@ -210,7 +210,7 @@ usage(int argc, char *argv[], size_t w, size_t h) {
     }
 
     size_t w_div = argc == 1 ? 2 : std::stol(argv[1]);
-    size_t h_div = argc == 1 ? 2 : std::stol(argv[1]);
+    size_t h_div = argc == 1 ? 2 : std::stol(argv[2]);
 
     if (((w/w_div) < 4) || ((h/h_div) < 4)){
         std::cerr << "The minimum region width and height is 4" << std::endl;
