@@ -36,13 +36,28 @@ To report erratas, typos, ... please mail either [alvabre@unizar.es](mailto:alva
 1. Please briefly respond to the following questions: ¿Is a concurrent
    application always parallel? ¿Is a parallel application always concurrent?
 
-1. According to Amdahl's Law, for a program where the sequential part
+2. According to Amdahl's Law, for a program where the sequential part
    represents the 15% of the total, what would be the potential speed-up for a
    16-core machine.
 
-1. Can a processor execute instructions from two different instruction sets?
+3. Can a processor execute instructions from two different instruction sets?
 
-# Problems
+4. Enumerate what are the key design features of GPUs to allow a very fast context switching of wavefronts.
+
+5. Explain what the conditional branching problem is on GPUs and how it is solved:
+
+# Test Questions
+
+1. The Local Data Share (LDS) cache on a GPU is used to:
+
+	a) Amplify the regular cache bandwidth
+	b) Execute atomic instructions
+	c) Synchronization of wavefronts
+	d) All of the above
+	e) None of the above
+
+
+# Exercises
 
 1. The doc product algorithm takes two vectors of the same length and returns a
    single number. The number is the sum of the products of the corresponding
@@ -69,12 +84,12 @@ To report erratas, typos, ... please mail either [alvabre@unizar.es](mailto:alva
 
     Please answer the following questions:
 
-    1. Implement the doc product using threads and static partitioning.
+    a. Implement the doc product using threads and static partitioning.
 
-    1. Implement the doc product assuming you have the thread pool and the
+    b. Implement the doc product assuming you have the thread pool and the
        thread-safe queue from Laboratory 4.
 
-    1. For the thread-pool version, would all tasks perform the same ammount of work?
+    c. For the thread-pool version, would all tasks perform the same ammount of work?
 
-1. Given an `std::vector<int>` array, could you please write a parallel
+2. Given an `std::vector<int>` array, could you please write a parallel
    algorithm that finds the minimum and maximum values of the array.
