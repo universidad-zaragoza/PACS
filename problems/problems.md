@@ -28,7 +28,7 @@ header-includes: |
 This brief collection of problems is divided in three parts. The first part covers
 small questions, the second part includes test questioans, and the part part refers to some longer exercises.
 
-To report erratas, typos, ... please mail either [alvabre@unizar.es](mailto:alvabre@unizar.es),
+To report erratas, typos... please mail either [alvabre@unizar.es](mailto:alvabre@unizar.es),
 [rgran@unizar.es](mailto:rgran@unizar.es) or [dario@unizar.es](mailto:dario@unizar.es).
 
 # Small Questions
@@ -97,3 +97,5 @@ To report erratas, typos, ... please mail either [alvabre@unizar.es](mailto:alva
 
 2. Given an `std::vector<int>` array, could you please write a parallel
    algorithm that finds the minimum and maximum values of the array.
+   
+3. See Exercise 2 from the collection of exercises referring to metrics.
