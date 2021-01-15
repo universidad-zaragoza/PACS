@@ -70,7 +70,19 @@ To report erratas, typos... please mail either [alvabre@unizar.es](mailto:alvabr
 	
 	c) Local Memory is an abstraction not present in OpenCL
 	
-	d) None of the previous ones
+	d) Workitems in the same workgroup
+	
+	e) None of the previous ones
+	
+3. In OpenCL, workitems that access global shared variable must explicitly assure memory order in order to avoid race conditions
+
+	a) Always
+	
+	b) Just in case they do not belong to the same workgroup
+	
+	c) Just in case they do belong to the same workgroup
+	
+	d) Never
 
 # Exercises
 
@@ -110,3 +122,5 @@ To report erratas, typos... please mail either [alvabre@unizar.es](mailto:alvabr
    algorithm that finds the minimum and maximum values of the array.
    
 3. See Exercise 2 from the collection of exercises referring to metrics.
+
+4. 
