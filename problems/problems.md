@@ -26,7 +26,7 @@ header-includes: |
 # Preliminary Notes
 
 This brief collection of problems is divided in three parts. The first part covers
-small questions, the second part includes test questioans, and the part part refers to some longer exercises.
+small questions, the second part includes test questions, and the third part refers to some longer exercises.
 
 To report erratas, typos... please mail either [alvabre@unizar.es](mailto:alvabre@unizar.es),
 [rgran@unizar.es](mailto:rgran@unizar.es) or [dario@unizar.es](mailto:dario@unizar.es).
@@ -45,6 +45,8 @@ To report erratas, typos... please mail either [alvabre@unizar.es](mailto:alvabr
 4. Enumerate what are the key design features of GPUs to allow a very fast context switching of wavefronts.
 
 5. Explain what the conditional branching problem is on GPUs and how it is solved.
+
+6. Make comparative analisys 
 
 # Test Questions
 
