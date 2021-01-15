@@ -46,7 +46,7 @@ To report erratas, typos... please mail either [alvabre@unizar.es](mailto:alvabr
 
 5. Explain what the conditional branching problem is on GPUs and how it is solved.
 
-6. Make comparative analisys 
+6. Make comparative analysis between a GPU and an ASIC.
 
 # Test Questions
 
@@ -62,6 +62,15 @@ To report erratas, typos... please mail either [alvabre@unizar.es](mailto:alvabr
 	
 	e) None of the above
 
+2. In OpenCL, Local Memory is shared between:
+	
+	a) All the workitems of a global work domain
+	
+	b) Workitems in the same kernel launch
+	
+	c) Local Memory is an abstraction not present in OpenCL
+	
+	d) None of the previous ones
 
 # Exercises
 
