@@ -25,8 +25,8 @@ header-includes: |
 
 # Preliminary Notes
 
-This brief collection of problems is divided in two parts. The first covers
-small questions, while the second presents some longer problems.
+This brief collection of problems is divided in three parts. The first part covers
+small questions, the second part includes test questioans, and the part part refers to some longer exercises.
 
 To report erratas, typos, ... please mail either [alvabre@unizar.es](mailto:alvabre@unizar.es),
 [rgran@unizar.es](mailto:rgran@unizar.es) or [dario@unizar.es](mailto:dario@unizar.es).
@@ -44,16 +44,20 @@ To report erratas, typos, ... please mail either [alvabre@unizar.es](mailto:alva
 
 4. Enumerate what are the key design features of GPUs to allow a very fast context switching of wavefronts.
 
-5. Explain what the conditional branching problem is on GPUs and how it is solved:
+5. Explain what the conditional branching problem is on GPUs and how it is solved.
 
 # Test Questions
 
 1. The Local Data Share (LDS) cache on a GPU is used to:
 
 	a) Amplify the regular cache bandwidth
+	
 	b) Execute atomic instructions
+	
 	c) Synchronization of wavefronts
+	
 	d) All of the above
+	
 	e) None of the above
 
 
