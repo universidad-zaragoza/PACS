@@ -74,7 +74,7 @@ To report erratas, typos... please mail either [alvabre@unizar.es](mailto:alvabr
 
 # Exercises
 
-1. The doc product algorithm takes two vectors of the same length and returns a
+1. The dot product algorithm takes two vectors of the same length and returns a
    single number. The number is the sum of the products of the corresponding
    entries in the input victors.
 
