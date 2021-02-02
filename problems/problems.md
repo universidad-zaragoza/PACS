@@ -126,5 +126,6 @@ To report erratas, typos... please mail either [alvabre@unizar.es](mailto:alvabr
 4. Write an OpenCL program that calculates the dot product of to integer arrays. Additionally to the kernel code, in the host side of the program, just focus on the buffer management, command-queue management and kernel launch.
 
     a. Please, analytically model the execution time of this work assuming the computational device has the following characteristics: 8 compute units, each
-       compute unit has 128 parallel cores, each core has two floating-point arithmetic units and, frequency of the computational device is 1.5GHz 
+       compute unit has 128 parallel cores, each core has two floating-point arithmetic units and, frequency of the computational device is 1.5GHz. Assumption 1:
+       just floating point instructions contribute to the execution time. Assumption 2: each FPU can process a floating point instrution per cycle.
 	
