@@ -32,7 +32,7 @@
 // Vec is a structure to store position (x,y,z) and color (r,g,b)
 struct Vec {
     double x, y, z;
-    Vec(double x_=0, double y_=0, double z_=0){ x=x_; y=y_; z=z_; }
+    explicit Vec(double x_=0.0, double y_=0.0, double z_=0.0){ x=x_; y=y_; z=z_; }
     Vec operator+(const Vec &b) const {
         return Vec(x+b.x,y+b.y,z+b.z);
     }
@@ -184,9 +184,9 @@ void render(int w, int h, int samps, Ray cam,
 
     for (int y=y0; y<y1; y++) {                       // Loop over image rows
         for (unsigned short x=x0, Xi[3]={0,0,static_cast<unsigned short>(y*y*y)}; x<x1; x++) {   // Loop cols
-            Vec r;
             for (int sy=0, i=(h-y-1)*w+x; sy<2; sy++) {     // 2x2 subpixel rows
                 for (int sx=0; sx<2; sx++) {        // 2x2 subpixel cols
+                    Vec r{0.0, 0.0, 0.0};
                     for (int s=0; s<samps; s++) {
                         double r1=2*erand48(Xi), dx=r1<1 ? sqrt(r1)-1: 1-sqrt(2-r1);
                         double r2=2*erand48(Xi), dy=r2<1 ? sqrt(r2)-1: 1-sqrt(2-r2);
