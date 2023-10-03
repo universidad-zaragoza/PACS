@@ -6,7 +6,7 @@ void hello() {
 }
 
 int main() {
-     std::thread t(hello);
+     std::thread t {hello};
      t.join(); // wait for completion
 }
 
