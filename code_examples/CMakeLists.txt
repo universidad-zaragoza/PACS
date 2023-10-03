@@ -1,4 +1,4 @@
-ADD_PACS_EXECUTABLE(TARGET hello SOURCES hello_pacs.cc)
+ADD_PACS_EXECUTABLE(TARGET hello_pacs SOURCES hello_pacs.cc)
 ADD_PACS_EXECUTABLE(TARGET thread_joinable SOURCES thread_joinable.cc)
 ADD_PACS_EXECUTABLE(TARGET hello_pacs_two_threads SOURCES hello_pacs_two_threads.cc)
 ADD_PACS_EXECUTABLE(TARGET hello_pacs_args SOURCES hello_pacs_args.cc)
