@@ -18,7 +18,7 @@ int main() {
     const size_t N {8};
     const float A {3.14f};
     using vf = std::vector<float>;
-    vf z {N, 0.0f};
+    vf z (N, 0.0f);
     vf x, y;
 
     std::random_device rd;
