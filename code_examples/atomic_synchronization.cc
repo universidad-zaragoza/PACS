@@ -4,7 +4,7 @@
 #include <thread>
 
 namespace {
-    std::atomic<int> shared_variable(0);
+    std::atomic<int> shared_variable {0};
 }
 
 void increase_var(const size_t n)
@@ -18,8 +18,8 @@ int main() {
 
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dis(512, 1024);
-    size_t n = dis(gen);
+    std::uniform_int_distribution<> dis {4096, 8192};
+    size_t n = dis(gen) *  1024;
 
     std::thread t(increase_var, n);
 
