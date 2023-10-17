@@ -41,6 +41,8 @@ cmake -DCMAKE_BUILD_TYPE=Release ../ # generate the Makefile with cmake
 make # compile the examples
 ls # list the examples
 ```
+Please note that the invocation to `cmake` includes the path `../` that correspond to the parent directory where
+the main `CMakeLists.txt` file resides.
 
 If you want to compile for debugging, please note that at this point, we will
 have two sets of binaries, set the variable `CMAKE_BUILD_TYPE` when calling
