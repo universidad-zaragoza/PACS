@@ -5,7 +5,7 @@
 namespace {
 
     std::mutex m;
-    int shared_var = 0;
+    int shared_var {0};
 }
 
 void increment() {
