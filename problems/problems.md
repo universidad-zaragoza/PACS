@@ -224,3 +224,49 @@ For example, if the input array contains this set of numbers {0, 1, 1, 1, 2,
     ```
 
     b. What could be the maximum speed-up of this implementation?
+
+8. Matrix multiplication belongs to the most used algorithm list
+   in robotics, graphics, and computer vision applications. Therefore, almost
+   every application requires a fast parallel matrix multiplication algorithm.
+
+   Assuming a basic 3 nested loop serial implementation in C++:
+
+   ```C++
+   using fmatrix = matrix<float>;
+
+   fmatrix matrix_multiply(const fmatrix &a, const fmatrix &b)
+   {
+       fmatrix c{rows, cols};
+
+       for(size_t i = 0; i < a.rows(); ++i) {
+          for(size_t j = 0; j < b.cols(); ++j) {
+              float val{0.0f};
+              for(size_t k = 0; k < a.cols(); ++k) {
+                  val+=a(i, k) * b(k, j);
+              }
+              c(i, j)=val;
+          }
+       }
+       return c;
+   }
+   ```
+
+   a. Using `std::async`, write a parallel version `async_col_matrix_multiply` that
+   when the number of concurrent threads supported by the system is 1, only uses
+   1 thread. Otherwise, the maximum number of concurrent `std::async` will be
+   the number of columns of a matrix, `a.cols()`.
+ 
+   b. Imagine you have access to a 1024 multi-core machine, and `a.cols()` is
+   always smaller than 128. What would be the maximum speed-up of the parallel
+   version implemented in step a? Could you please write another version,
+   `asyc_matrix_multiply` able to extract all the possible parallelism for this
+   1024 multi-core machine.
+ 
+   c. Assuming that every `std::async` creates a new thread on every
+   invocation, could an implementation based on a thread-pool be faster than
+   the version based on `std::async`? Why?
+ 
+   *Note: You can assume that the `matrix<float>` class provides all
+   requirements for storing matrices. If you need extra trivial methods of the
+   class besides rows and cols, please fell free to use them without writing
+   their implementation.*
