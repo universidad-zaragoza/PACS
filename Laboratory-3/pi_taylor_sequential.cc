@@ -6,6 +6,8 @@
 using my_float = long double;
 
 my_float pi_taylor(size_t steps) {
+
+    (void)steps; // ensure no warnings with unused variable
     return 0.0f;
 }
 
