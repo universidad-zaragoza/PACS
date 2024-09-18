@@ -1,11 +1,11 @@
-cmake_minimum_required (VERSION 3.1)
+cmake_minimum_required (VERSION 3.5)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 include(AddPacsExecutable)
 include(BuildType)
 
 project (PACS_EXAMPLES)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # disable clang-tidy to avoid compilation issues
 # set(CMAKE_CXX_CLANG_TIDY "clang-tidy;-checks=*")
