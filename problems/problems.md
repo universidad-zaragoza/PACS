@@ -48,6 +48,14 @@ To report erratas, typos... please mail either [alvabre@unizar.es](mailto:alvabr
 
 6. Make comparative analysis between a GPU and an ASIC.
 
+7. The iron law of computer performance states that the execution time can be
+   defined as: $Ex. \quad Time \equal N \times CPI \times T_{cycle}$. To
+   improve performance and save energy consumption, a new vector extension has
+   been proposed. The extension reduces both the number of instructions and the frequency
+   by half and 10%, respectively. Since the extra hardware complexity increases the cycles
+   per instruction by 33%, could you please identify which alternative provides the lowest
+   execution time.
+
 # Test Questions
 
 1. The Local Data Share (LDS) cache on a GPU is used to:
@@ -270,3 +278,52 @@ For example, if the input array contains this set of numbers {0, 1, 1, 1, 2,
    requirements for storing matrices. If you need extra trivial methods of the
    class besides rows and cols, please fell free to use them without writing
    their implementation.*
+
+9. Alpha compositing is a computer graphics method that combines
+   a foreground and a background images to simulate transparency. With 2D
+   images, alpha compositing extends each pixel with an additional value
+   representing transparency.  This new alpha value ranges between 0, fully
+   transparency, and 1 (fully opaque). For example, assuming two images named
+   $f$ and $b$, so that $f$ is over $b$, in another words, $f$ is the
+   foreground, the over operator can be computed following these equations:
+
+   $$ \alpha_{o} = \alpha_{f} + \alpha_{b} ( 1 - \alpha_{f} )$$
+
+   $$ p_{o} = \frac {p_{f} \alpha_{f} + p_{b} \alpha_{b} ( 1 - \alpha_{f}} {\alpha_{o}} $$
+
+   Where $p_{x}$ represents the three color channels (red, green, blue) of each
+   pixel and $\alpha_{x}$ represents the alpha value of the output ($o$),
+   foreground ($f$), and background images ($b$).
+
+   Assuming a pixel and image classes as follows:
+
+   ```C++
+   struct pixel {
+     public:
+       uint8_t red, green, blue;
+       uint8_t alpha; // 255 corresponds to opaque
+   };
+
+   template <typename T, size_t N, size_t M>
+   class image {
+     using storage_type = std::array<std::array<T, M>, N>;
+     public:
+       image(){};
+       T& operator()(size_t i, size_t j) {return _array[i][j];};
+       T operator()(size_t i, size_t j) const {return _array[i][j];};
+     private:
+       storage_type _array;
+   };
+   const size_t height = 128, width = 128;
+   using alpha_image = image<pixel, height, width>;
+   ```
+
+   a. (1 point) Please write a sequential version of a `alpha_image
+   alpha_over_operator(const alpha_image& f, const alpha_image& b)` free
+   function that returns the result of performing an `alpha_over_operator` on two
+   input images. You can use `std::clamp(uint8_t v, uint8_t lo, uint8_t hi)` to
+   clamp the resulting operations if required.
+
+   b. (2.5 points) Please write a parallel version of `alpha_over_operator`
+   that extracts parallelism and pick between data and task level parallelism
+   depending on the regularity of the problem.
