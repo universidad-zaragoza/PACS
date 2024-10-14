@@ -11,3 +11,6 @@ ADD_PACS_EXECUTABLE(TARGET parallel_sum_future SOURCES parallel_sum_future.cc)
 ADD_PACS_EXECUTABLE(TARGET saxpy_future SOURCES saxpy_future.cc)
 ADD_PACS_EXECUTABLE(TARGET packaged_task SOURCES packaged_task.cc)
 ADD_PACS_EXECUTABLE(TARGET atomic_synchronization SOURCES atomic_synchronization.cc)
+
+# C++23 tests
+ADD_PACS_EXECUTABLE(TARGET saxpy_ranges SOURCES saxpy_ranges.cc)
