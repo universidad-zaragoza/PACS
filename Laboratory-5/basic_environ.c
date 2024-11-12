@@ -19,37 +19,51 @@
 #else
   #include <CL/cl.h>
 #endif
-  
-// check error, in such a case, it exits
+
+// ABOUT ERRORS
+// Remmember to check error codes from every OpenCL API call
+// Info about error codes can be found at the reference manual of OpenCL
+// At the following url, you can find name for each error code
+//  https://gist.github.com/bmount/4a7144ce801e5569a0b6
+//  https://streamhpc.com/blog/2013-04-28/opencl-error-codes/
+// Following function checks errors, and in such a case, it prints the code, the string and it exits
 
 void cl_error(cl_int code, const char *string){
-	if (code != CL_SUCCESS){
-		printf("%d - %s\n", code, string);
-	    exit(-1);
-	}
+    if (code != CL_SUCCESS){
+        printf("%d - %s\n", code, string);
+        exit(-1);
+    }
 }
 ////////////////////////////////////////////////////////////////////////////////
 
+
+/* ATTENTION: While prgramming in OpenCL it is a good idea to keep the reference manuals handy:
+ * https://bashbaug.github.io/OpenCL-Docs/pdf/OpenCL_API.pdf
+ * https://www.khronos.org/files/opencl-1-2-quick-reference-card.pdf (summary of OpenCL API)
+ * https://www.khronos.org/assets/uploads/developers/presentations/opencl20-quick-reference-card.pdf
+ */
+
+
 int main(int argc, char** argv)
 {
-  int err;                            	// error code returned from api calls
-  size_t t_buf = 50;			// size of str_buffer
-  char str_buffer[t_buf];		// auxiliary buffer	
-  size_t e_buf;				// effective size of str_buffer in use
-	    
-  size_t global_size;                      	// global domain size for our calculation
-  size_t local_size;                       	// local domain size for our calculation
+  int err;                              // error code returned from api calls
+  size_t t_buf = 50;            // size of str_buffer
+  char str_buffer[t_buf];       // auxiliary buffer 
+  size_t e_buf;             // effective size of str_buffer in use
+        
+  size_t global_size;                       // global domain size for our calculation
+  size_t local_size;                        // local domain size for our calculation
 
-  const cl_uint num_platforms_ids = 10;				// max of allocatable platforms
-  cl_platform_id platforms_ids[num_platforms_ids];		// array of platforms
-  cl_uint n_platforms;						// effective number of platforms in use
-  const cl_uint num_devices_ids = 10;				// max of allocatable devices
-  cl_device_id devices_ids[num_platforms_ids][num_devices_ids];	// array of devices
-  cl_uint n_devices[num_platforms_ids];				// effective number of devices in use for each platform
-	
-  cl_device_id device_id;             				// compute device id 
-  cl_context context;                 				// compute context
-  cl_command_queue command_queue;     				// compute command queue
+  const cl_uint num_platforms_ids = 10;             // max of allocatable platforms
+  cl_platform_id platforms_ids[num_platforms_ids];      // array of platforms
+  cl_uint n_platforms;                      // effective number of platforms in use
+  const cl_uint num_devices_ids = 10;               // max of allocatable devices
+  cl_device_id devices_ids[num_platforms_ids][num_devices_ids]; // array of devices
+  cl_uint n_devices[num_platforms_ids];             // effective number of devices in use for each platform
+    
+  cl_device_id device_id;                           // compute device id 
+  cl_context context;                               // compute context
+  cl_command_queue command_queue;                   // compute command queue
     
 
   // 1. Scan the available platforms:
@@ -64,7 +78,7 @@ int main(int argc, char** argv)
   }
   printf("\n");
   // ***Task***: print on the screen the name, host_timer_resolution, vendor, versionm, ...
-	
+    
   // 2. Scan for devices in each platform
   for (int i = 0; i < n_platforms; i++ ){
     err = clGetDeviceIDs( /***???***/, num_devices_ids, devices_ids[i], &(n_devices[i]));
@@ -81,7 +95,7 @@ int main(int argc, char** argv)
       cl_error(err, "clGetDeviceInfo: Getting device max compute units available");
       printf("\t\t [%d]-Platform [%d]-Device CL_DEVICE_MAX_COMPUTE_UNITS: %d\n\n", i, j, max_compute_units_available);
     }
-  }	
+  } 
   // ***Task***: print on the screen the cache size, global mem size, local memsize, max work group size, profiling timer resolution and ... of each device
 
 
@@ -96,8 +110,8 @@ int main(int argc, char** argv)
   command_queue = clCreateCommandQueueWithProperties( /***???***/, proprt, &err);
   cl_error(err, "Failed to create a command queue\n");
 
-
-
+  /* It is still missing the runtime part of the OpenCL program: createBuffers, createProgram, createKernel, setKernelArg, ... */
+  
   return 0;
 }
 
