@@ -25,8 +25,9 @@ header-includes: |
 
 # Preliminary Notes
 
-This brief collection of problems is divided in three parts. The first part covers
-small questions, the second part includes test questions, and the third part refers to some longer exercises.
+This brief collection of problems is divided in three parts. The first part
+covers small questions, the second part includes test questions, and the third
+part refers to some longer exercises.
 
 To report erratas, typos... please mail either [alvabre@unizar.es](mailto:alvabre@unizar.es),
 [rgran@unizar.es](mailto:rgran@unizar.es) or [dario@unizar.es](mailto:dario@unizar.es).
@@ -96,11 +97,11 @@ To report erratas, typos... please mail either [alvabre@unizar.es](mailto:alvabr
 
 1. The dot product algorithm takes two vectors of the same length and returns a
    single number. The number is the sum of the products of the corresponding
-   entries in the input victors.
+   entries in the input vectors.
 
     In C++, the algorithm can be coded as follows:
 
-    ```C++
+    ```cpp
     template<typename T>
     T doc_product(const std::vector<T> &a, const std::vector<T> &b>
     {
@@ -141,7 +142,7 @@ To report erratas, typos... please mail either [alvabre@unizar.es](mailto:alvabr
     each compute unit has 128 parallel cores, each core has two floating-point
     arithmetic units and, frequency of the computational device is 1.5GHz.
     Assumption 1: just floating point instructions contribute to the execution
-    time. Assumption 2: each FPU can process a floating point instrution per
+    time. Assumption 2: each FPU can process a floating point instruction per
     cycle.
 
 5. Please write a parallel program that given an array of integer values,
@@ -150,7 +151,7 @@ To report erratas, typos... please mail either [alvabre@unizar.es](mailto:alvabr
    value is prime, you can assume that the function `bool is_prime(int n)` is
    available:
 
-    ```C++
+    ```cpp
     bool is_prime(int n) {
       if (n <= 3) {
         return n > 1;
@@ -185,7 +186,7 @@ To report erratas, typos... please mail either [alvabre@unizar.es](mailto:alvabr
      a. Please implement a parallel version of the buckle sort algorithm. For sorting
      the buckets, you can use any standard sequential sorting algorithm as
 
-         ```C++
+         ```cpp
          template<typename T>
          void insertion_sort(std::vector<T>& array)
          {
@@ -218,14 +219,14 @@ For example, if the input array contains this set of numbers {0, 1, 1, 1, 2,
 
    You can assume the following initial skeleton:
 
-   ```C++
+   ```cpp
    int main() {
 
        const size_t N = 1024*8; // array size
        const size_t m_buckets = 32; // buckets
        const size_t n_threads = 8;
 
-       std::vector<int> array; // please asume this array has been already initialized
+       std::vector<int> array; // please assume this array has been already initialized
        std::vector<std::atomic<init>> histogram(m_buckets);
 
        // ...
@@ -239,7 +240,7 @@ For example, if the input array contains this set of numbers {0, 1, 1, 1, 2,
 
    Assuming a basic 3 nested loop serial implementation in C++:
 
-   ```C++
+   ```cpp
    using fmatrix = matrix<float>;
 
    fmatrix matrix_multiply(const fmatrix &a, const fmatrix &b)
@@ -289,7 +290,7 @@ For example, if the input array contains this set of numbers {0, 1, 1, 1, 2,
 
    $$ \alpha_{o} = \alpha_{f} + \alpha_{b} ( 1 - \alpha_{f} )$$
 
-   $$ p_{o} = \frac {p_{f} \alpha_{f} + p_{b} \alpha_{b} ( 1 - \alpha_{f}} {\alpha_{o}} $$
+   $$ p_{o} = \frac {p_{f} \alpha_{f} + p_{b} \alpha_{b} ( 1 - \alpha_{f})} {\alpha_{o}} $$
 
    Where $p_{x}$ represents the three color channels (red, green, blue) of each
    pixel and $\alpha_{x}$ represents the alpha value of the output ($o$),
@@ -297,7 +298,7 @@ For example, if the input array contains this set of numbers {0, 1, 1, 1, 2,
 
    Assuming a pixel and image classes as follows:
 
-   ```C++
+   ```cpp
    struct pixel {
      public:
        uint8_t red, green, blue;
