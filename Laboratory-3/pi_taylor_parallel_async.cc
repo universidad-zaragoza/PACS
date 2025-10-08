@@ -9,9 +9,8 @@
 
 using my_float = long double;
 
-void
-pi_taylor_chunk(std::vector<my_float> &output,
-        size_t thread_id, size_t start_step, size_t stop_step) {
+my_float
+pi_taylor_chunk(size_t start_step, size_t stop_step) {
 
 
 
