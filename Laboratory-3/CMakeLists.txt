@@ -1,4 +1,4 @@
 ADD_PACS_EXECUTABLE(TARGET pi_taylor_sequential SOURCES pi_taylor_sequential.cc)
-ADD_PACS_EXECUTABLE(TARGET pi_taylor_parallel_threads SOURCES pi_taylor_parallel.cc)
-ADD_PACS_EXECUTABLE(TARGET pi_taylor_parallel_async SOURCES pi_taylor_parallel.cc)
+ADD_PACS_EXECUTABLE(TARGET pi_taylor_parallel_threads SOURCES pi_taylor_parallel_threads.cc)
+ADD_PACS_EXECUTABLE(TARGET pi_taylor_parallel_async SOURCES pi_taylor_parallel_async.cc)
 ADD_PACS_EXECUTABLE(TARGET pi_taylor_parallel_async_kahan SOURCES pi_taylor_parallel_async_kahan.cc)
