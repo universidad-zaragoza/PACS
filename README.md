@@ -60,7 +60,7 @@ alternatives such as:
 ```bash
 make VERBOSE=1  # linux/mac OS specific
 cmake --build . -v # should work on any OS
-cmake --build --target hello # build a single target on Windows OS
+cmake --build --target hello # builds the target hello
 ```
 
 ### Possible Issues
