@@ -3,23 +3,24 @@
 #include <thread>
 
 namespace {
-
-    std::mutex m;
-    int shared_var {0};
+  std::mutex g_m;
+  int g_shared_var = 0;
 }
 
 void increment() {
-    m.lock();
-    ++shared_var;
-    m.unlock();
+  g_m.lock();
+  ++g_shared_var;
+  g_m.unlock();
 }
 
 int main() {
-    std::thread t0{increment};
-    std::thread t1{increment};
-
-    t0.join();
-    t1.join();
-
-    std::cout << shared_var << std::endl;
+  std::cout << "shared_var before: " << g_shared_var << std::endl;
+  
+  std::thread t0(increment);
+  std::thread t1(increment);
+  
+  t0.join();
+  t1.join();
+  
+  std::cout << "shared_var after: " << g_shared_var << std::endl;
 }
