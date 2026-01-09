@@ -264,17 +264,17 @@ For example, if the input array contains this set of numbers {0, 1, 1, 1, 2,
    when the number of concurrent threads supported by the system is 1, only uses
    1 thread. Otherwise, the maximum number of concurrent `std::async` will be
    the number of columns of a matrix, `a.cols()`.
- 
+
    b. Imagine you have access to a 1024 multi-core machine, and `a.cols()` is
    always smaller than 128. What would be the maximum speed-up of the parallel
    version implemented in step a? Could you please write another version,
    `asyc_matrix_multiply` able to extract all the possible parallelism for this
    1024 multi-core machine.
- 
+
    c. Assuming that every `std::async` creates a new thread on every
    invocation, could an implementation based on a thread-pool be faster than
    the version based on `std::async`? Why?
- 
+
    *Note: You can assume that the `matrix<float>` class provides all
    requirements for storing matrices. If you need extra trivial methods of the
    class besides rows and cols, please fell free to use them without writing
@@ -319,12 +319,140 @@ For example, if the input array contains this set of numbers {0, 1, 1, 1, 2,
    using alpha_image = image<pixel, height, width>;
    ```
 
-   a. (1 point) Please write a sequential version of a `alpha_image
+   a. Please write a sequential version of a `alpha_image
    alpha_over_operator(const alpha_image& f, const alpha_image& b)` free
    function that returns the result of performing an `alpha_over_operator` on two
    input images. You can use `std::clamp(uint8_t v, uint8_t lo, uint8_t hi)` to
    clamp the resulting operations if required.
 
-   b. (2.5 points) Please write a parallel version of `alpha_over_operator`
+   b. Please write a parallel version of `alpha_over_operator`
    that extracts parallelism and pick between data and task level parallelism
    depending on the regularity of the problem.
+
+10. Please briefly describe and correct the concurrency programming
+   errors, if any, in the following fragments of code:
+
+    1.
+
+        ```cpp
+        void f() { … }
+        int main() {
+          std::thread t(f);
+          t.deatch();
+          t.join();
+        }
+        ```
+
+    2.
+
+        ```cpp
+        int fib(int n) {
+            std::mutex m;
+            if(n < 2) { return n; }
+
+            int result = 0;
+            {
+                std::lock_guard lk(m);
+                auto fib_n_1 = std::async(std::launch::async, fib, n - 1).get();
+                auto fib_n_2 = std::async(std::launch::deferred, fib, n - 2).get();
+                result = fib_n_1 + fib_n_2;
+            }
+            return result;
+        }
+        ```
+
+    3.
+
+        ```cpp
+        std::mutex m;
+        std::condition_variable cv;
+
+        void producer() { cv.notify_one(); }
+        void consumer() {
+           std::unique_lock<std::mutex> lk(m);
+           cv.wait(lk);
+        }
+        int main () {
+           std::thread tp(producer);
+           std::thread tc(consumer);
+           tp.join();
+           tc.join();
+        }
+        ```
+
+    _Note: Please assume the inclusion of all required headers. They have been
+    excluded to save space._
+
+11. Event-based cameras produce a unidimensional stream of events
+   that can include timestamps, pixel position, and polarity. The number of
+   events, and consequently the stream size, varies depending on the scene being
+   observed. One feasible parallelization approach for unknown-size streams is the
+   divide-and-conquer pattern. In this pattern, when the work size exceeds a
+   predetermined threshold, the work is divided into two smaller chunks that are executed
+   in parallel. This process repeats recursively until the size of each chunk falls below the
+   threshold.
+
+   Please implement a parallel `size_t count_polarity(const stream& s, const
+   size_t min_threshold = 128)` method that returns the number of events whose
+   polarity is true. For the minimum threshold, you can assume 128 events.
+
+   The `event` and `stream` classes are as follows:
+
+   ```cpp
+   class event
+   {
+      std::pair<size_t, size_t> _pos;
+      bool _polarity;
+      std::chrono::time_point<std::chrono::steady_clock> _timestamp;
+
+    public:
+      event() : _pos(), _polarity(), _timestamp() {}
+      event(bool polarity) : _pos(), _polarity(polarity), _timestamp() {}
+      bool polarity() const { return _polarity; }
+   };
+
+   using stream = std::vector<event>;
+   ```
+
+12. Max pooling is an important operation in convolutional neural
+   networks (CNN) that downsamples feature maps, which helps reducing the
+   spacial dimensions of the data with retaining the key information.
+
+   ![Max Pooling Example](./figures/max_pooling.drawio.pdf){ width=200 }
+
+   The accompanying figure illustrates the input and resultant feature map of a max
+   pooling operation, configured with a 2×2 filter. Max pooling systematically
+   traverses the input feature map, applying a non-overlapping window (the filter)
+   to distinct regions. Within each 2×2 region, the algorithm identifies and
+   selects the pixel possessing the maximum value, which is then propagated to the
+   corresponding position in the output feature map.
+
+   a. Write a serial version of a max pooling operating assuming a filter size
+      of 2 by 2 and a input feature map size of 128 by 128 for `unsigned int` values. What
+      will be the size of the output? Please assume the following
+      definitions for completing the code:
+
+       ```cpp
+       template <typename T, size_t N, size_t M>
+       class feature_map
+       {
+       	using storage_type = std::array<std::array<T, M>, N>;
+       	public:
+       	image(){};
+       	T& operator()(size_t i, size_t j) {return _array[i][j];};
+       	T operator()(size_t i, size_t j) const {return _array[i][j];};
+
+       	private:
+       	storage_type _array;
+       };
+
+       template <typename T, size_t in_N, size_t in_M, size_t filter_N, size_t filter_M>
+       void max_pooling_serial(const feature_map& in<T, in_N, in_M>, feature_map& out<T, ...>);
+       ```
+
+       Where `N`, `M`, `filter_N`, and `filter_M` represents the rows and columns
+       for both the input feature map and the filter, respectively.
+
+   b. If the max pooling operation is paralellizable, please write a parallel version justifying
+      your choice between data and task-level parallelism. Also your solution should have
+      the same arguments and return type of the serial version.
