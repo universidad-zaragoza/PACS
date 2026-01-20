@@ -456,3 +456,76 @@ For example, if the input array contains this set of numbers {0, 1, 1, 1, 2,
    b. If the max pooling operation is paralellizable, please write a parallel version justifying
       your choice between data and task-level parallelism. Also your solution should have
       the same arguments and return type of the serial version.
+
+13. In Neural networks, sparsification is a technique aimed at reducing the amount of
+   computation by avoid multiplication and addition operations in convolutions.
+   Its operation is as follows. When a kernel weight is smaller than a threshold, the weight is replaced by a
+   zero. As a result, the sparse kernel neither stores the value nor performs the
+   multiplication and addition operations when applying the filter. For example
+   assuming a 2x2 kernel with values `[[0.1, 0.2], [0.1, [0.1]]`, the equivalent
+   sparse kernel will only store `[[0, 1, 0.2]]` for a threshold of 0.15. The 3-tuple
+   correspond to row 0, column 1, and value 0.2, which is the single element of the kernel
+   larger than 0.15. Assumming the following definitions:
+
+   ```cpp
+    template <typename T, size_t N, size_t M>
+    class matrix
+    {
+        using storage_type = std::array<std::array<T, M>, N>;
+        public:
+        matrix(){};
+        size_t rows() const { return _array.size(); }
+        size_t cols() const { return _array[0].size(); }
+        T& operator()(size_t i, size_t j) {return _array[i][j];};
+        T operator()(size_t i, size_t j) const {return _array[i][j];};
+
+        private:
+        storage_type _array;
+    };
+
+    using value_type = float;
+    const size_t N = 480;
+    const size_t M = 640;
+    using image = matrix<value_type, N, M>;
+    using kernel = matrix<value_type, 3, 3>;
+   ```
+
+   Please answer the following questions:
+
+   a. Write a `sparse_kernel` class definition where each sparse
+      element corresponds to a struct made of three data members: `size_t row`, `size_t
+      col`, and `value_type value`. The `sparse_kernel` class has to provide methods for returning the
+      number of rows and columns of the kernel at least. The class should use the minimum
+      required space to save all values larger than the threshold and could store
+      kernels of any 2D width and height.
+
+   b. Write a free function `void apply_sparse_kernel(const image& in_image,
+      const sparse_kernel& skernel, image& out_image, const size_t begin_row, const
+      size_t end_row)` that applies the sparse kernel to the input image for the rows
+      between `begin_row` and `end_row`. As a reference, please consider that he
+      pseudo-code for an standard convolution on a dense (non sparse) kernel is as
+      follows:
+
+      ```
+      for row in in_image rows {
+        for col in in_image cols {
+          sum = 0.0f;
+          for krow in kernel rows {
+            for kcol in kernel cols {
+              if is_valid_position(row, col, krow, kcol) {
+                sum += kernel(krow, kcol) * in_image(row + krow, col + kcol);
+              }
+            }
+          }
+          out_image(row, col) = sum;
+        }
+      }
+      ```
+
+       Both input and output images have the same size, and for the edges, if the position is invalid, the computation can be avoided.
+
+   c. Implement a free function `void parallel_sparse_convolution(const image& in_image,
+      const sparse_kernel& skernel, image& out_image)` that perform the operation on
+      the whole image concurrently. Justify the choice between data or task level parallelism and
+      use as many parallel threads as possible in the running machine.
+
