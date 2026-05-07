@@ -338,7 +338,7 @@ For example, if the input array contains this set of numbers {0, 1, 1, 1, 2,
         void f() { … }
         int main() {
           std::thread t(f);
-          t.deatch();
+          t.detach();
           t.join();
         }
         ```
