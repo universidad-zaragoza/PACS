@@ -30,7 +30,7 @@ covers small questions, the second part includes test questions, and the third
 part refers to some longer exercises.
 
 To report erratas, typos... please mail either [alvabre@unizar.es](mailto:alvabre@unizar.es),
-[rgran@unizar.es](mailto:rgran@unizar.es) or [dario@unizar.es](mailto:dario@unizar.es).
+[rgran@unizar.es](mailto:rgran@unizar.es), or [dario@unizar.es](mailto:dario@unizar.es).
 
 # Small Questions
 
@@ -103,18 +103,17 @@ To report erratas, typos... please mail either [alvabre@unizar.es](mailto:alvabr
 
     ```cpp
     template<typename T>
-    T doc_product(const std::vector<T> &a, const std::vector<T> &b>
-    {
+    T doc_product(const std::vector<T>& a, const std::vector<T>& b> {
+      if(a.lenght() != b.lenght()) {
+          error(...);
+      }
+      // initialize to 0 regardless the type
+      T dot_p{}; // Also T dot_p = T();
 
-    if(a.lenght() != b.lenght()) {
-        error(...);
-    }
-
-    // initialize to 0 regardless the type
-    T dot_p{}; // Also T dot_p = T();
-
-    for(size_t i = 0; i < a.length(); ++i) {
-      dot_p+=(a[i]*b[i]);
+      for(size_t i = 0; i < a.length(); ++i) {
+        dot_p+=(a[i]*b[i]);
+      }
+      return dot_p;
     }
     ```
 
@@ -123,7 +122,8 @@ To report erratas, typos... please mail either [alvabre@unizar.es](mailto:alvabr
     a. Implement the doc product using threads and static partitioning.
 
     b. Implement the doc product assuming you have the thread pool and the
-       thread-safe queue from Laboratory 4.
+       thread-safe queue from Laboratory 4. Feel free to change the provided `doc_product` function
+       if required.
 
     c. For the thread-pool version, would all tasks perform the same ammount of work?
 
