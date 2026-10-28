@@ -28,16 +28,20 @@ variable `CMAKE_BUILD_TYPE` to `Debug`.
 
 ## Code snippets from Class
 
-The directory `code_examples` contains many of the small C++ programs and
+The directory `code_examples` contains many of the small C++ and CUDA programs and
 fragments from the slides.
 
-To compile them on Linux or mac OS, you can use `cmake`. For example:
+## Repository compilation
+
+After cloning the repo, go to the root directory and execute the following commands.
+
+Assuming a release build on linux or mac OS, please type:
 
 ```bash
 mkdir build-release
 cd build-release
 cmake -DCMAKE_BUILD_TYPE=Release ../ # generate the Makefile with cmake
-make # compile the examples
+make # compile the examples and the skeletons of some laboratories
 ls # list the examples
 ```
 Please note that the invocation to `cmake` includes the path `../` that correspond to the parent directory where
@@ -54,6 +58,10 @@ cmake -DCMAKE_BUILD_TYPE=Debug ../ # generate the Makefile with cmake
 make -j4 # compile the examples in parallel with 4 jobs
 ```
 
+The difference between release and debug builds is the flags used during compilation.
+In release build type, the compilation includes optimizations and no debug information,
+while debug build type does not optimize binaries and includes debug information.
+
 Also if you want to see the actual build commands, there are several
 alternatives such as:
 
@@ -63,22 +71,9 @@ cmake --build . -v # should work on any OS
 cmake --build --target hello # builds the target hello
 ```
 
-### Possible Issues
+### Individual laboratory compilation
 
-In some machines of the Computer Science Department, two different versions of
-`cmake`, versions 2 and 3, coexists. Their binary names are `cmake` and
-`cmake3`, respectively. Since this repository requires `cmake` version 3, if
-you get an error running `cmake` about the version, please switch to `cmake3`
-executable. You can check cmake's version with:
-
-```bash
-eniac:PACS user$ cmake -version
-cmake version 3.18.3
-```
-
-## Laboratories
-
-Each laboratory includes its own directory, but all of them can be built at the
+Each laboratory and the snippets includes its own directory, but all of them can be built at the
 same time if required. To build a single laboratory; e.g., the third laboratory in
 release mode, please follow these steps:
 
@@ -95,3 +90,17 @@ _Suggestion: One workflow approach for the labs is to develop and test in debug 
 inside a `build-debug` directory, and switch to release, in another
 `build-release` directory, to run the final experiments and obtain execution
 times or other metrics._
+
+### Possible Issues
+
+In some machines of the Computer Science Department, two different versions of
+`cmake`, versions 2 and 3, coexists. Their binary names are `cmake` and
+`cmake3`, respectively. Since this repository requires `cmake` version 3, if
+you get an error running `cmake` about the version, please switch to `cmake3`
+executable. You can check cmake's version with:
+
+```bash
+eniac:PACS user$ cmake -version
+cmake version 3.18.3
+```
+
