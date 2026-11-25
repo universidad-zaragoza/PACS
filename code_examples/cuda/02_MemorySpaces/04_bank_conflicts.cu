@@ -8,12 +8,14 @@ __global__ void colwalk(float *out, int iters) {
   __shared__ float tile[32][32 + PAD];
   for (int r = 0; r < 32; ++r)
     tile[r][threadIdx.x] = (float)(r + threadIdx.x);    // row write: no conflict
+
   __syncthreads();
 
   float s = 0.0f;
   for (int it = 0; it < iters; ++it)
     for (int r = 0; r < 32; ++r)
       s += tile[(threadIdx.x + it) & 31][r];            // column access, possible conflict between threads in the same warp accessing the same bank
+
   out[blockIdx.x * blockDim.x + threadIdx.x] = s;
 }
 
